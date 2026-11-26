@@ -1838,7 +1838,7 @@ Entrar</a>
     
       
       
-        <input id="quantity1-template--30302664655230__main" aria-label="Quantidade" type="radio" name="quantity" value="1" form="product-form-template--30302664655230__main" data-input="input_1">
+        <input id="quantity1-template--30302664655230__main" aria-label="Quantidade" type="radio" name="quantity" value="1" form="product-form-template--30302664655230__main" checked data-input="input_1">
         <label for="quantity1-template--30302664655230__main" class="quantity-break quantity-break--no-badge quantity-break--badge-style-1 quantity-break--benefit-top" data-quantity="1" data-input="input_1" data-base-compare-price="19790" data-percentage-left="1.0" data-fixed-discount="0" data-compare-mode="compare_price">
           <div class="quantity-break__wrapper">
             
@@ -1910,7 +1910,7 @@ Entrar</a>
     
       
       
-        <input id="quantity2-template--30302664655230__main" aria-label="Quantidade" type="radio" name="quantity" value="2" form="product-form-template--30302664655230__main" checked data-input="input_2">
+        <input id="quantity2-template--30302664655230__main" aria-label="Quantidade" type="radio" name="quantity" value="2" form="product-form-template--30302664655230__main" data-input="input_2">
         <label for="quantity2-template--30302664655230__main" class="quantity-break quantity-break--no-badge quantity-break--badge-style-1 quantity-break--benefit-top" data-quantity="2" data-input="input_2" data-base-compare-price="19790" data-percentage-left="0.87898" data-fixed-discount="0" data-compare-mode="compare_price">
           <div class="quantity-break__wrapper">
             
@@ -5460,7 +5460,7 @@ R$ 395,80
     2: 'https://seguro.lojavilanatalina.com.br/r/J6G1J3GUND'
   };
   const maxQuantity = 2;
-  let selectedQuantity = Number($('quantity-breaks input:checked')?.value || 2);
+  let selectedQuantity = Number($('quantity-breaks input:checked')?.value || 1);
   let cartQuantity = 0;
   let cartReturnFocus = null;
   const cart = $('#nuva-cart');

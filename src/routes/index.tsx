@@ -1,16 +1,22 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
-// The imported site is a static export served from public/nuva.
+// The imported site is a static export served from public/bem-materno.
 export const Route = createFileRoute("/")({
   beforeLoad: () => {
-    throw redirect({ href: "/nuva/index.html" });
+    throw redirect({ href: "/bem-materno/index.html" });
   },
   head: () => ({
     meta: [
-      { title: "NuvaRest | Nuva" },
-      { name: "description", content: "Conheça o Nuva da NuvaRest." },
-      { property: "og:title", content: "NuvaRest | Nuva" },
-      { property: "og:description", content: "Conheça o Nuva da NuvaRest." },
+      { title: "Bem Materno | Almofada de Apoio para Amamentação" },
+      {
+        name: "description",
+        content: "Conheça a almofada de apoio para amamentação da Bem Materno.",
+      },
+      { property: "og:title", content: "Bem Materno | Almofada de Apoio para Amamentação" },
+      {
+        property: "og:description",
+        content: "Conheça a almofada de apoio para amamentação da Bem Materno.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

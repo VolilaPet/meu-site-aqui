@@ -5538,7 +5538,11 @@ US$ 349,90
   });
   function updateOffer() {
     selectedQuantity = Number($('quantity-breaks input:checked')?.value || 1);
-    $$('.quantity-gift').forEach(gift => gift.dataset.unlocked = String(selectedQuantity >= Number(gift.dataset.quantity)));
+    $$('.quantity-gift').forEach(gift => {
+      const unlocked = selectedQuantity >= Number(gift.dataset.quantity);
+      gift.dataset.unlocked = String(unlocked);
+      gift.classList.toggle('quantity-gift--unlocked', unlocked);
+    });
     $$('.sticky-atc .price__regular .price-item--regular').forEach(el => el.textContent = money(offerTotal(selectedQuantity)));
     $$('.sticky-atc .price__sale .price-item--sale').forEach(el => el.textContent = money(offerTotal(selectedQuantity)));
     $$('.sticky-atc .price__sale .price-item--regular').forEach(el => el.textContent = money(selectedQuantity * 17495));

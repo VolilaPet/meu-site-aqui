@@ -7,15 +7,15 @@ export const Route = createFileRoute("/")({
   },
   head: () => ({
     meta: [
-      { title: "Bem Materno | Almofada de Apoio para Amamentação" },
+      { title: "MOMMY™ Almofada de Apoio para Amamentação | Bem Materno" },
       {
         name: "description",
-        content: "Conheça a almofada de apoio para amamentação da Bem Materno.",
+        content: "Conheça a MOMMY™, a almofada de apoio para amamentação da Bem Materno.",
       },
-      { property: "og:title", content: "Bem Materno | Almofada de Apoio para Amamentação" },
+      { property: "og:title", content: "MOMMY™ Almofada de Apoio para Amamentação | Bem Materno" },
       {
         property: "og:description",
-        content: "Conheça a almofada de apoio para amamentação da Bem Materno.",
+        content: "Conheça a MOMMY™, a almofada de apoio para amamentação da Bem Materno.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

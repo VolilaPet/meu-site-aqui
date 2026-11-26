@@ -2073,7 +2073,7 @@ R$ 395,80
           <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
         </path></svg>
         <span class="product-form__error-message"></span>
-      </div><form method="post" action="https://nuvarest.shop/cart/add" id="product-form-template--30302664655230__main" accept-charset="UTF-8" class="form" enctype="multipart/form-data" novalidate="novalidate" data-type="add-to-cart-form"><input type="hidden" name="form_type" value="product"><input type="hidden" name="utf8" value="✓"><div class="hidden product-form__variants" id="product-form-template--30302664655230__main__variants" data-values=""></div>
+      </div><form method="post" action="#" id="product-form-template--30302664655230__main" accept-charset="UTF-8" class="form" enctype="multipart/form-data" novalidate="novalidate" data-type="add-to-cart-form"><input type="hidden" name="form_type" value="product"><input type="hidden" name="utf8" value="✓"><div class="hidden product-form__variants" id="product-form-template--30302664655230__main__variants" data-values=""></div>
         <input type="hidden" name="id" value="58528429736318" class="product-variant-id">
         <div class="product-form__buttons"><div class="product-form__quantity-and-btn product-form__quantity-and-btn--none product-form__quantity-and-btn--">
             
@@ -5454,8 +5454,12 @@ R$ 395,80
   const $ = (selector, parent = document) => parent.querySelector(selector);
   const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
   const money = cents => 'R$ ' + (cents / 100).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-  const sourceStore = 'https://nuvarest.shop';
-  const variantId = '58528429736318';
+  // Links do checkout da loja: 1 unidade e kit com 2 unidades
+  const checkoutLinks = {
+    1: 'https://seguro.lojavilanatalina.com.br/r/P66K4SCAYC',
+    2: 'https://seguro.lojavilanatalina.com.br/r/J6G1J3GUND'
+  };
+  const maxQuantity = 2;
   let selectedQuantity = Number($('quantity-breaks input:checked')?.value || 2);
   let cartQuantity = 0;
   let cartReturnFocus = null;
@@ -5482,7 +5486,7 @@ R$ 395,80
     $('#nuva-cart-heading').textContent = 'Carrinho • ' + cartQuantity + (cartQuantity === 1 ? ' item' : ' itens');
     $('#nuva-cart-subtotal').textContent = money(total);
     checkout.setAttribute('aria-disabled', String(cartQuantity === 0));
-    checkout.href = cartQuantity ? sourceStore + '/cart/' + variantId + ':' + cartQuantity : '#';
+    checkout.href = checkoutLinks[cartQuantity] || '#';
     if (!cartQuantity) {
       cartBody.innerHTML = '<div class="nuva-cart-empty"><p>Seu carrinho está vazio</p><button type="button" data-close-cart>Continuar comprando</button></div>';
       return;
@@ -5497,7 +5501,9 @@ R$ 395,80
 
   function addToCart(event) {
     event?.preventDefault();
-    cartQuantity += selectedQuantity;
+    const link = checkoutLinks[selectedQuantity];
+    if (link) { window.location.href = link; return; }
+    cartQuantity = Math.min(maxQuantity, cartQuantity + selectedQuantity);
     renderCart();
     setCartOpen(true);
   }
@@ -5509,7 +5515,7 @@ R$ 395,80
   }));
   cart?.addEventListener('click', event => {
     if (event.target.closest('[data-close-cart]')) setCartOpen(false);
-    if (event.target.closest('[data-cart-plus]')) { cartQuantity++; renderCart(); }
+    if (event.target.closest('[data-cart-plus]')) { cartQuantity = Math.min(maxQuantity, cartQuantity + 1); renderCart(); }
     if (event.target.closest('[data-cart-minus]')) { cartQuantity = Math.max(0, cartQuantity - 1); renderCart(); }
     if (event.target.closest('[data-cart-remove]')) { cartQuantity = 0; renderCart(); }
   });

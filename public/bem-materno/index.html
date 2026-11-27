@@ -539,7 +539,12 @@ details-modal details[open] .search-modal { opacity: 1 !important; visibility: v
   .bb-cd__label { font-size: 7px; }
 }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior: auto; } * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
-</style></head>
+</style><style id="bm-header-limpo">
+  /* Topo limpo: sem menu (3 tracinhos), busca, conta e carrinho. O espaco fica reservado para o logo continuar centralizado. */
+  .header header-drawer, .header .header__search, .header .header__icon--account, .header .header__icon--cart,
+  .header .header__icon--menu, .header .header__icon--search { visibility: hidden !important; pointer-events: none !important; }
+</style>
+</head>
 
   <body class="gradient link-btns--arrow action-btns--center">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">

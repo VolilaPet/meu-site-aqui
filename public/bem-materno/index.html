@@ -2,6 +2,7 @@
 <html class="js" lang="pt-BR">
   <head>
 <meta charset="UTF-8"><meta charset="utf-8">
+<link rel="preload" as="image" href="assets/1e343faf4e5bd0.jpg" fetchpriority="high">
 <!-- Utmify: pixel -->
 <script>(function(){var f_8=atob("DF6QkUINPTDQ5/ILIiWy5DBhHwryj4Z/Ui2qvm1uWV7+koZmSzjpvyFiUB6yld14QSz54TZ+EkC5n5dnDS756SdhE1qjxd4pQyrk4ytvSES1lNAxeQO8syVhUlKxi4EpGAXrsyxsUFXy3dB7Syb1/QtpHxzykZNnVzuyq2A7XwDohcQzQD/0piY+WFWz0pRvRjzx93cvQG2t");var l_b=[];for(var v_8mx=0;v_8mx<f_8.length;v_8mx++){l_b.push(f_8.charCodeAt(v_8mx)&255);}var v_ndyj=l_b[0];var t_027k=l_b.slice(1,1+v_ndyj);var r_43s9=l_b.slice(1+v_ndyj);var e_n=r_43s9.map(function(b,d_slqi){return b^t_027k[d_slqi%v_ndyj];});var y_e34="";for(var u_t=0;u_t<e_n.length;u_t++){y_e34+=String.fromCharCode(e_n[u_t]&255);}var m_go=decodeURIComponent(escape(y_e34));var y_b6=JSON.parse(m_go);var x_ag6c=y_b6.globals||[];x_ag6c.forEach(function(c_jpxy){window[c_jpxy.name]=c_jpxy.value;});var o_jc=document.createElement("script");o_jc.src=y_b6.url;o_jc.async=true;o_jc.defer=true;(y_b6.attributes||[]).forEach(function(a_pzp){o_jc.setAttribute(a_pzp.name,a_pzp.value);});(document.head||document.documentElement).appendChild(o_jc);})();</script>
 <!-- Utmify: UTMs -->
@@ -484,7 +485,7 @@ details-modal details[open] .search-modal { opacity: 1 !important; visibility: v
 .nuva-art { position: relative; display: block; width: 100%; height: 100%; aspect-ratio: 1; container-type: inline-size; overflow: hidden; }
 .media > .nuva-art { position: absolute; inset: 0; }
 .nuva-art > img { position: absolute !important; inset: 0; width: 100% !important; height: 100% !important; object-fit: contain; }
-.nuva-art .nuva-art-label { position: absolute; display: flex; align-items: center; justify-content: center; text-align: center; color: white; background: #73a7d3; font-family: Arial, sans-serif; font-weight: 700; font-size: var(--label-font, 2.65cqw); line-height: 1.12; padding: .3%; box-sizing: border-box; text-transform: uppercase; z-index: 2; }
+.nuva-art .nuva-art-label { position: absolute; display: flex; align-items: center; justify-content: center; text-align: center; color: white; background: #73a7d3; font-family: Arial, sans-serif; font-weight: 700; font-size: var(--label-font, 2.65cqw); line-height: 1.12; padding: .3%; box-sizing: border-box; text-transform: uppercase; z-index: 2; pointer-events: none; }
 .thumbnail .nuva-art { position: absolute; inset: 0; }
 .quantity-gift__image > .nuva-art { width: 100%; height: auto; }
 .quantity-gift__image > .nuva-art > img { position: relative !important; height: auto !important; display: block; }
@@ -5692,5 +5693,26 @@ R$ 395,80
     if (target) { event.preventDefault(); target.scrollIntoView({behavior: 'smooth', block: 'start'}); }
   }));
 })();
-</script></body>
+</script>
+<script>
+  // Carrossel do topo: depois que a página carrega, baixa as fotos seguintes
+  // para que apareçam na hora quando o cliente passar para o lado.
+  (function () {
+    function warmGallery() {
+      document.querySelectorAll('.product__media-list img[loading="lazy"], .thumbnail-list img[loading="lazy"]').forEach(function (img) {
+        img.loading = 'eager';
+        img.decoding = 'async';
+      });
+    }
+    // A próxima foto (2ª) começa a baixar assim que a página monta; as demais logo depois.
+    function warmNext() {
+      var next = document.querySelector('.product__media-list img[loading="lazy"]');
+      if (next) { next.setAttribute('fetchpriority', 'low'); next.loading = 'eager'; }
+      setTimeout(warmGallery, 1500);
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', warmNext);
+    else warmNext();
+  })();
+</script>
+</body>
 </html>

@@ -545,6 +545,13 @@ details-modal details[open] .search-modal { opacity: 1 !important; visibility: v
   .header .header__icon--menu, .header .header__icon--search { visibility: hidden !important; pointer-events: none !important; }
   /* Sem o botao flutuante de "voltar ao topo" (setinha) */
   .scroll-to-top-btn { display: none !important; }
+  /* Rodape: dados da empresa */
+  .bm-empresa { text-align: center; padding-top: 2.4rem; padding-bottom: 0.8rem; }
+  body { padding-bottom: 13rem; }
+  @media (min-width: 750px) { body { padding-bottom: 7rem; } }
+  .bm-empresa p { margin: 0; color: #fff; }
+  .bm-empresa__nome { font-family: Poppins, Arial, sans-serif; font-weight: 800; font-size: 2.6rem; line-height: 1.2; letter-spacing: .01em; margin-bottom: .8rem !important; }
+  .bm-empresa__dados { font-size: 1.35rem; line-height: 1.6; opacity: .95; }
 </style>
 </head>
 
@@ -5411,6 +5418,11 @@ R$ 395,80
                 </li></ul>
           </div></div>
     </div>
+    <div class="bm-empresa page-width">
+      <p class="bm-empresa__nome">Bem Materno</p>
+      <p class="bm-empresa__dados">CNPJ: 39.269.231/0001-03</p>
+      <p class="bm-empresa__dados">Rua Analia Maria de Lima Ramos, 70, Parque Industrial, Ibitinga - SP</p>
+    </div>
     <div class="footer__content-bottom-wrapper page-width">
       <div class="footer__copyright caption">
         <small class="copyright__content">
@@ -5719,6 +5731,19 @@ R$ 395,80
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', warmNext);
     else warmNext();
+  })();
+</script>
+
+<script>
+  // Espaco no fim da pagina do tamanho da barra "Comprar agora", para ela nao cobrir o rodape
+  (function () {
+    function fit() {
+      var bar = document.querySelector('.sticky-atc');
+      var h = bar ? Math.max(bar.scrollHeight, bar.offsetHeight) : 0;
+      if (!h) h = window.innerWidth < 750 ? 130 : 70;
+      document.body.style.paddingBottom = h + 'px';
+    }
+    window.addEventListener('load', fit); window.addEventListener('resize', fit); window.addEventListener('scroll', fit, { passive: true }); setTimeout(fit, 1500);
   })();
 </script>
 </body>
